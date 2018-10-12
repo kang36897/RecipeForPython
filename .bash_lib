@@ -1,0 +1,72 @@
+#!/bin/bash
+
+BASE_PATH=$PATH
+
+function switchActivePythonEnvironmentTo {
+	#define a temporary variable to save the path
+	local npath="$BASE_PATH"
+
+	for p in $2
+	do
+		local index_of_last_character=$((${#p}-1))
+		local last_character="${p:$index_of_last_character:1}"
+		#echo "last character: $last_character in $p"
+		if [ $last_character = ':' ]
+		then
+			npath=$p$npath
+		else
+			npath=$p:$npath		
+		fi
+	done	
+
+	export PATH=$npath
+	echo "python interpretor has changed to $1"
+}
+
+
+#****************************************************************************************#
+# 1.copy the following code into the .bashrc and change it accordingly.               
+# if it does not exist, just create one.
+#****************************************************************************************#
+
+# if [ -f $HOME/.bash_lib ]; then
+#    source $HOME/.bash_lib
+# fi
+
+
+#****************************************************************************************#
+# 2.copy the following code into the .bash_profile and change it accordingly             
+#****************************************************************************************#
+
+#****************************************************************************************#
+# Note: add the commonly used tools in the common path             
+#****************************************************************************************#
+
+# COMMON_PATH="$PATH"
+
+
+# # Setting PATH for Python 2.7
+# export PYTHONIOENCODING=utf8
+
+
+
+#****************************************************************************************#
+# 3.set a variable to store the default python home; uncomment the related lines           
+#****************************************************************************************#
+
+# SYSTEM_DEFAULT_PYTHON_HOME="/Library/Frameworks/Python.framework/Versions/2.7"
+# DEFAULT_PYTHON="$SYSTEM_DEFAULT_PYTHON_HOME/bin $COMMON_PATH"
+
+# alias switch2Default="switchActivePythonEnvironmentTo default $DEFAULT_PYTHON "
+
+
+#****************************************************************************************#
+# 4.set a variable to store the anaconda python home; uncomment the related lines                      
+#****************************************************************************************#
+
+ # ANACONDA_HOME=/Users/bkang016/work-station/anaconda3
+ # CONDA_PYTHON="$ANACONDA_HOME/bin $COMMON_PATH "
+
+ # alias switch2Conda="switchActivePythonEnvironmentTo conda $CONDA_PYTHON "
+
+
